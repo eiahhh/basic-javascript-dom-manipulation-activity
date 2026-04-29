@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banner</title>
+</head>
+
+<body style="background-color: #add8e6;">
+    <div
+        style="min-height: 100vh; padding: 20px; font-family: Georgia, serif; display: flex; flex-direction: column; align-items: flex-start;">
+        <div id="banner"
+            style="background-color: #fffacd; border: 2px solid #333; padding: 20px; max-width: 600px; margin-bottom: 20px;">
+            <h2 id="banner-title" style="margin: 0 0 12px 0; font-size: 22px;">Hi! I am Juneiah Psalm.</h2>
+            <ul id="item-list">
+                <li>I want to travel the world.</li>
+                <li>Be able to excel in playing the keyboard.</li>
+                <li>Hike different mountains.</li>
+                <li>Build meaningful projects that will help the community.</li>
+            </ul>
+        </div>
+
+        <!-- input new item -->
+        <div
+            style="margin-bottom: 16px; max-width: 600px; width: 100%; display: flex; flex-direction: row; align-items: center;">
+            <label for="new-item-input" style="font-weight: bold; margin-right: 8px;">Add new:</label>
+            <input id="new-item-input" type="text" placeholder="new item"
+                style="padding: 4px 8px; border: 1px solid #555; width: 200px;">
+        </div>
+
+        <!-- required buttons -->
+        <div style="display: flex; gap: 12px; flex-wrap: wrap; max-width: 600px; width: 100%; flex-direction: row; ">
+            <button onclick="changeFont()"
+                style="padding: 12px 20px; width: 150px; background: #f0f0f0; border: 1px solid #999; cursor: pointer; font-size: 16px;">Change
+                font family</button>
+            <button onclick="toggleBold()"
+                style="padding: 12px 20px; width: 150px; background: #f0f0f0; border: 1px solid #999; cursor: pointer; font-size: 16px;">Bold
+                text</button>
+            <button onclick="addItem()"
+                style="padding: 12px 20px; width: 150px; background: #f0f0f0; border: 1px solid #999; cursor: pointer; font-size: 16px;">Add
+                new item on the list</button>
+        </div>
+    </div>
+
+    <script>
+        const fonts = [
+            'Georgia, serif',
+            'Arial, sans-serif',
+            'Verdana, sans-serif',
+            'Courier New, monospace',
+            'Tahoma, sans-serif',
+            'Comic Sans MS, cursive'
+        ];
+
+        let fontIndex = 0;
+        let isBold = false;
+
+        function changeFont() {
+            fontIndex = (fontIndex + 1) % fonts.length;
+            const list = document.getElementById('item-list');
+            list.style.fontFamily = fonts[fontIndex];
+        }
+
+        function toggleBold() {
+            isBold = !isBold;
+            const items = document.querySelectorAll('#item-list li');
+            items.forEach(li => {
+                li.style.fontWeight = isBold ? 'bold' : 'normal';
+            });
+        }
+
+        function addItem() {
+            const input = document.getElementById('new-item-input');
+            const value = input.value.trim();
+
+            if (!value) {
+                alert('Please enter an item first.');
+                return;
+            }
+            const list = document.getElementById('item-list');
+            const li = document.createElement('li');
+            li.textContent = value;
+
+            li.style.fontFamily = fonts[fontIndex];
+            li.style.fontWeight = isBold ? 'bold' : 'normal';
+            list.appendChild(li);
+            input.value = '';
+        }
+    </script>
+</body>
+
+</html>
