@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Log In</title>
+
+    <style>
+
+    </style>
+
+<body>
+    <div class="form-container">
+        <div class="field">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter username">
+        </div>
+
+        <div class="field">
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter password">
+            <div class="error-msg" id="error-msg"></div>
+        </div>
+
+        <button type="submit" onclick="handleSubmit()">Submit</button>
+    </div>
+
+    <script>
+        function handleSubmit() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (!username) {
+                alert('Please enter a username.');
+                return;
+            }
+
+            if (password.length <= 8) {
+                alert('Password should be more than 8 characters and contain both uppercase and lowercase characters.');
+                return;
+            }
+
+            if (/^\d+$/.test(password)) {
+                alert('Password should not consist only of numbers. It must include letters.');
+                return;
+            }
+
+            const hasUpper = /[A-Z]/.test(password);
+            const hasLower = /[a-z]/.test(password);
+            if (!hasUpper || !hasLower) {
+                alert('Password should be more than 8 characters and contain both uppercase and lowercase characters.');
+                return;
+            }
+
+            alert('Welcome, ' + username + '!');
+        }
+    </script>
+</body>
+</head>
+
+</html>
