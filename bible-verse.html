@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Verse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        cinzelDec: ['"Cinzel Decorative"', 'serif'],
+                        fell: ['"IM Fell English"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* CARD BACKGROUND */
+        .card-bg {
+            background: radial-gradient(ellipse 65% 45% at 50% 25%, rgba(45, 216, 47, 0.12) 0%, transparent 70%),
+                radial-gradient(ellipse 100% 70% at 50% 100%, rgba(25, 98, 29, 0.492) 0%, transparent 65%),
+                linear-gradient(160deg, #317da5 0%, #25646f 50%, #317da5 100%);
+        }
+
+        /* CARD - GLOW */
+        .card-glow {
+            box-shadow: 0 0 0 1px rgba(201, 151, 58, 0.35),
+                0 0 35px 6px rgba(201, 151, 58, 0.14),
+                0 20px 65px rgba(0, 0, 0, 0.65);
+        }
+
+        /* CARD DETAILS */
+        .corner {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-color: rgba(201, 151, 58, 0.65);
+            border-style: solid;
+        }
+
+        .corner-tl {
+            top: 12px;
+            left: 12px;
+            border-width: 2px 0 0 2px;
+        }
+
+        .corner-tr {
+            top: 12px;
+            right: 12px;
+            border-width: 2px 2px 0 0;
+        }
+
+        .corner-bl {
+            bottom: 12px;
+            left: 12px;
+            border-width: 0 0 2px 2px;
+        }
+
+        .corner-br {
+            bottom: 12px;
+            right: 12px;
+            border-width: 0 2px 2px 0;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(201, 151, 58, 0.6), transparent);
+        }
+
+        .shimmer-text {
+            background: linear-gradient(90deg,
+                    #c9973a 0%,
+                    #f0d07a 30%,
+                    #ffe8a0 50%,
+                    #f0d07a 70%,
+                    #c9973a 100%);
+            background-size: 400px 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+        }
+
+        .text-shadow-verse {
+            text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55), 0 1px 3px rgba(0, 0, 0, 0.4);
+        }
+
+        .text-shadow-key {
+            text-shadow: 0 0 20px rgba(240, 208, 122, 0.4);
+        }
+
+        /* ANIMATIONS */
+        @keyframes shimmer {
+            0% {
+                background-position: -400px 0;
+            }
+
+            100% {
+                background-position: 400px 0;
+            }
+        }
+
+        @keyframes fadeUp {
+            fron {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fadeUp 0.65s ease both;
+        }
+    </style>
+</head>
+
+<body class="bg-stone-100 min-h-screen flex flex-col items-start p-6">
+
+    <!-- BUTTONS -->
+    <div class="flex gap-2 mb-7">
+        <button onclick="addDesign()"
+            class="px-4 py-1.5 text-sm bg-gray-200 border border-gray-400 rounded-sm hover:bg-gray-300 transition-colors cursor-pointer">
+            Add Design
+        </button>
+        <button onclick="removeDesign()"
+            class="px-4 py-1.5 text-sm bg-gray-200 border border-gray-400 rounded-sm hover:bg-gray-300 transition-colorsw cursor-pointer">
+            Remove Design
+        </button>
+    </div>
+
+    <!-- BIBLE VERSE (PLAIN) -->
+    <div id="plain" class="max-w-2xl w-full">
+        <p class="font-serif font-bold text-base mb-2">Romans 8:31</p>
+        <p class="font-serif text-sm leading-relaxed text-gray-800">
+            "What, then, shall we say in response to these things? If God is for us, who can be against us?"
+        </p>
+    </div>
+
+    <!-- BIBLE VERSE (DESIGN) -->
+    <div id="design" class="hidden max-w-2xl w-full">
+        <div class="card-bg relative rounded-sm px-12 py-10 overflow-hidden animate-fade-up">
+
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
+
+            <div class="flex items-center gap-3 mb-5">
+                <div class="divider-line"></div>
+                <span class="text-xs tracking-[6px]" style="color: #c9973a;">✦ ✦ ✦</span>
+                <div class="divider-line"></div>
+            </div>
+
+            <p class="font-cinzelDec text-center text-xl tracking-widest mb-1 shimmer-text">
+                Romans 8:31
+            </p>
+
+            <p class="font-cinzel text-center text-[10px] tracking-[5px] uppercase mb-6 opacity-70"
+                style="color: #f0d07a;">
+                New International Version
+            </p>
+
+            <span class="block font-fell text-6xl leading-none mb-1 opacity-100" style="color: #c9973a;">“</span>
+
+            <p class="font-fell italic text-lg leading-loose text-center px-2 text-shadow-verse"
+                style="color: #f5ede0;">
+                What, then, shall we say in response to these things?
+            </p>
+
+            <p class="font-fell italic text-center text-xl tracking-wide my-3 text-shadow-key" style="color: #fbca44;">
+                If God is for us,
+            </p>
+
+            <p class="font-fell italic text-center text-xl tracking-wide my-3 text-shadow-key" style="color: #fbca44;">
+                who can be against us?
+            </p>
+
+            <span class="block text-right font-fell text-6xl leading-none mt-1 pr-2 opacity-100"
+                style="color: #c9973a;">”</span>
+
+            <div class="flex items-center gap-3 mt-5">
+                <div class="divider-line"></div>
+                <span class="text-base tracking-[10px]" style="color: #c9973a;">✦</span>
+                <div class="divider-line"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addDesign() {
+            document.getElementById('plain').className = 'hidden';
+            document.getElementById('design').className = 'max-w-2xl w-full';
+        }
+
+        function removeDesign() {
+            document.getElementById('design').className = 'hidden';
+            document.getElementById('plain').className = 'max-w-2xl w-full';
+        }
+    </script>
+
+</body>
+
+</html>
